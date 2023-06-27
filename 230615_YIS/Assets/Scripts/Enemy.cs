@@ -1,19 +1,57 @@
 using System;
 
-public class Enemy 
+public class Enemy
 {
-    private String name; 
+    public enum EnemyType
+    {
+        Basic = 0,
+        Range,
+       
+
+    }
+
+    private EnemyType enemyType;
+
     private int hp;
+    private int atk;
+    private float speed;
 
-
-    public Enemy(String name, int hp)  // 持失切
+    void Func()
     {
-        this.name = name;
+        enemyType = EnemyType.Range;
+    }
+
+
+    public Enemy(EnemyType type, int hp, int atk, int speed)  // 持失切
+    {
+        this.enemyType = type;
         this.hp = hp;
+        this.atk = atk;
+        this.speed = speed;
     }
-    public void GetEnemyInfo()
+
+    public int Hp
     {
-        UnityEngine.Debug.Log($"name : {this.name} attack: {this.hp}");
+        get{ return this.hp; }
     }
+
+    public int Atk
+    {
+        get{ return this.atk; }
+    }
+    public float Speed
+    {
+        get{ return this.speed; }
+    }
+
+    public bool Hit(int dmg)
+    {
+        if (this.hp - dmg <= 0) return false;
+
+        this.hp -= dmg;
+
+        return true;
+    }
+
 
 }
